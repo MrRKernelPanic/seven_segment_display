@@ -3,8 +3,12 @@ import pytest
 from seven_segment_display import digit, display_digit
 
 
-def test_digit():
-    assert digit(0) == [" _ ", "| |", "|_|"]
+@pytest.mark.parametrize("number, components", [
+    (0, [' _ ', '| |', '|_|']),
+    (1, ['   ', '  |', '  |']),
+])
+def test_digit_components(number, components):
+    assert digit(number) == components
 
 
 def test_display_single_digit_zero():
