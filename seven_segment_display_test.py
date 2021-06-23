@@ -21,7 +21,7 @@ def digit():
     (9, [" _ ", "|_|", "  |"])
 ])
 def test_digit_components(number, components, digit):
-    assert digit.digit(number) == components
+    assert digit.digit_components[number] == components
 
 
 def test_display_single_digit_zero(digit):

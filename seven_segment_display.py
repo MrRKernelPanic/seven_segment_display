@@ -1,7 +1,7 @@
 class Digit:
 
-    def digit(self, number):
-        number_dictionary = {
+    def __init__(self):
+        self.digit_components = {
             0: [" _ ", "| |", "|_|"],
             1: ["   ", "  |", "  |"],
             2: [" _ ", " _|", "|_ "],
@@ -13,10 +13,7 @@ class Digit:
             8: [" _ ", "|_|", "|_|"],
             9: [" _ ", "|_|", "  |"]
         }
-        return number_dictionary[number]
 
     def display_digit(self, number):
-        digit_components = self.digit(number)
         seperator = "\n"
-
-        return seperator.join(digit_components)
+        return seperator.join(self.digit_components[number])
