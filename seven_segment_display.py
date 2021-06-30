@@ -1,4 +1,4 @@
-class Digit:
+class SevenSegmentDisplay:
 
     def __init__(self):
         self.digit_components = {
@@ -14,6 +14,13 @@ class Digit:
             9: [" _ ", "|_|", "  |"]
         }
 
-    def display_digit(self, number):
-        seperator = "\n"
-        return seperator.join(self.digit_components[number])
+    def display_numbers(self, number):
+        top_line = ""
+        middle_line = ""
+        bottom_line = ""
+
+        for digit in str(number):
+            top_line += self.digit_components[int(digit)][0]
+            middle_line += self.digit_components[int(digit)][1]
+            bottom_line += self.digit_components[int(digit)][2]
+        return top_line + "\n" + middle_line + "\n" + bottom_line

@@ -1,11 +1,11 @@
 import pytest
 
-from seven_segment_display import Digit
+from seven_segment_display import SevenSegmentDisplay
 
 
 @pytest.fixture
-def digit():
-    return Digit()
+def display():
+    return SevenSegmentDisplay()
 
 
 @pytest.mark.parametrize("number, components", [
@@ -20,15 +20,20 @@ def digit():
     (8, [" _ ", "|_|", "|_|"]),
     (9, [" _ ", "|_|", "  |"])
 ])
-def test_digit_components(number, components, digit):
-    assert digit.digit_components[number] == components
+def test_digit_components(number, components, display):
+    assert display.digit_components[number] == components
 
 
-def test_display_single_digit_zero(digit):
+def test_display_single_digit_zero(display):
     zero = " _ \n| |\n|_|"
-    assert digit.display_digit(0) == zero
+    assert display.display_numbers(0) == zero
 
 
-def test_display_single_digit_seven(digit):
+def test_display_single_digit_seven(display):
     seven = " _ \n  |\n  |"
-    assert digit.display_digit(7) == seven
+    assert display.display_numbers(7) == seven
+
+
+def test_display_multiple_digits_(display):
+    fourtyseven = "    _ \n|_|  |\n  |  |"
+    assert display.display_numbers(47) == fourtyseven
