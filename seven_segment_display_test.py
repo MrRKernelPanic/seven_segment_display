@@ -37,3 +37,13 @@ def test_display_single_digit_seven(display):
 def test_display_multiple_digits_(display):
     fourtyseven = "    _ \n|_|  |\n  |  |"
     assert display.display_numbers(47) == fourtyseven
+
+
+def test_horizontally_scaled_digit(display):
+    three = " __ \n __|\n __|"
+    assert display.display_scaled_number(3, 2) == three
+
+
+def test_scalable_digit(display):
+    three = " __ \n   |\n __|\n   |\n __|"
+    assert display.display_scaled_number(3, 2, 2) == three
