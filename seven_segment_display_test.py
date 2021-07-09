@@ -20,23 +20,25 @@ def display():
     (8, [" _ ", "|_|", "|_|"]),
     (9, [" _ ", "|_|", "  |"])
 ])
+
+
 def test_digit_components(number, components, display):
     assert display.digit_components[number] == components
 
 
 def test_display_single_digit_zero(display):
     zero = " _ \n| |\n|_|"
-    assert display.display_numbers(0) == zero
+    assert display.display_scaled_number(0) == zero
 
 
 def test_display_single_digit_seven(display):
     seven = " _ \n  |\n  |"
-    assert display.display_numbers(7) == seven
+    assert display.display_scaled_number(7) == seven
 
 
 def test_display_multiple_digits_(display):
     fourtyseven = "    _ \n|_|  |\n  |  |"
-    assert display.display_numbers(47) == fourtyseven
+    assert display.display_scaled_number(47) == fourtyseven
 
 
 def test_horizontally_scaled_digit(display):
@@ -47,3 +49,8 @@ def test_horizontally_scaled_digit(display):
 def test_scalable_digit(display):
     three = " __ \n   |\n __|\n   |\n __|"
     assert display.display_scaled_number(3, 2, 2) == three
+
+
+def test_scalable_digits(display):
+    sixtytwo = " __  __ \n|      |\n|__  __|\n|  ||   \n|__||__ "
+    assert display.display_scaled_number(62, 2, 2) == sixtytwo
