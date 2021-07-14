@@ -15,29 +15,35 @@ class SevenSegmentDisplay:
         }
 
         self.top_line = ""
-        self.middle_text = ""
-        self.bottom_line = ""
-        self.middle_line = ""
         self.middle_top = ""
+        self.middle_line = ""
         self.bottom_top = ""
+        self.bottom_line = ""
+        self.middle_text = ""
 
-    def _calculate_top_line(self, width, digit):
-        self.top_line += self.digit_components[int(digit)][0][0]
-        self.top_line += width * self.digit_components[int(digit)][0][1]
-        self.top_line += self.digit_components[int(digit)][0][2]
+    def display_scaled_number(self, number, width=1, height=1):
+        self.calculate_width(number, width)
+        self.calculate_height(height)
+        fullstring = self.combining_to_final_string()
+        return fullstring
 
-    def _calculate_middle_line(self, width, digit):
-        line = []
-        line.append(self.digit_components[int(digit)][1][0])
-        line.append(width*self.digit_components[int(digit)][1][1])
-        line.append(self.digit_components[int(digit)][1][2])
-        seperator = ""
-        self.middle_line += seperator.join(line)
+    def calculate_width(self, number, width):
+        for digit in str(number):
+            self.top_line += self._calculate_line(digit, width, 0)
+            self.middle_line += self._calculate_line(digit, width, 1)
+            self.bottom_line += self._calculate_line(digit, width, 2)
 
-    def _calculate_bottom_line(self, width, digit):
-        self.bottom_line += self.digit_components[int(digit)][2][0]
-        self.bottom_line += width*self.digit_components[int(digit)][2][1]
-        self.bottom_line += self.digit_components[int(digit)][2][2]
+    def _calculate_line(self, digit, width, row):
+        digit = int(digit)
+        line = ""
+        line += self.digit_components[digit][row][0]
+        line += width * self.digit_components[digit][row][1]
+        line += self.digit_components[digit][row][2]
+        return line
+
+    def calculate_height(self, height):
+        self.middle_top = self.height_padding(self.middle_line, height)
+        self.bottom_top = self.height_padding(self.bottom_line, height)
 
     def height_padding(self, string_to_pad, height):
         padding = ""
@@ -46,15 +52,7 @@ class SevenSegmentDisplay:
         padding = padding.replace("_", " ")
         return padding
 
-    def display_scaled_number(self, number, width=1, height=1):
-        for digit in str(number):
-            self._calculate_top_line(width, digit)
-            self._calculate_middle_line(width, digit)
-            self._calculate_bottom_line(width, digit)
-
-        self.middle_top = self.height_padding(self.middle_line, height)
-        self.bottom_top = self.height_padding(self.bottom_line, height)
-
+    def combining_to_final_string(self):
         fullstring = ""
         fullstring += self.top_line + "\n" + self.middle_top
         fullstring += self.middle_line + "\n"
